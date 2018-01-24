@@ -205,8 +205,6 @@ def get_regressor_full_sample(E_Rm, R_pfo_df, decimal_unit):
     regressor_Rm = sm.add_constant(regressor_Rm)
     return regressor_Rm
 
-
-
 def run_ols(y, x, pfunc):
     model = sm.OLS(y,x).fit()
     summary = model.summary()
