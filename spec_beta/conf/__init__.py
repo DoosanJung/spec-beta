@@ -1,2 +1,2 @@
 #!/usr/bin/env python
-__author__ = 'Doosan (Jackson) Jung`
+__author__ = "Doosan (Jackson) Jung"
