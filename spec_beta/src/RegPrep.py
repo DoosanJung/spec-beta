@@ -31,7 +31,7 @@ class RegPrep(object):
         '''
         OUTPUT: Monthly regression months
         '''
-        mo_lst = pd.read_csv('/Users/streamlyzer/DSJ/sb/data/yrmo.csv',header=None, names='m')
+        mo_lst = pd.read_csv(self.home_path + self.file_path['year_and_month],header=None, names='m')
         mo_lst = mo_lst.m.apply(lambda mo: datetime.strptime(str(mo), "%Y%m"))
         reg_mo_lst = mo_lst[(mo_lst >= datetime.strptime(str(start_mo), "%Y%m"))&(mo_lst <= datetime.strptime(str(end_mo), "%Y%m"))]
         reg_mo_lst = reg_mo_lst.reset_index(drop=True)

@@ -22,5 +22,6 @@ class SpecBetaConfig(object):
     "SMB_MOM":"/spec_beta/data/SMB_MOM_wo_wknds.csv",
     "dividend_price_yield":"/spec_beta/data/monthly_DP_KOSPI_200401_201709.csv",
     "inflation":"/spec_beta/data/monthly_CPI_yearly_inflation.csv",
-    "CP_CD_spread":"/spec_beta/data/CP_CD_SPREAD_wo_wknds.csv"
+    "CP_CD_spread":"/spec_beta/data/CP_CD_SPREAD_wo_wknds.csv",
+    "year_and_month":"/spec_beta/data/yrmo.csv"
     }
