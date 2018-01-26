@@ -33,10 +33,10 @@ class ReturnDataPrep(object):
             symbols = pd.read_csv(self.home_path + self.file_path['symbols'])
             self.symbols_lst = symbols.columns.tolist()
             logger.info("Succeed in getting the symbol list")
+            return self.symbols_lst
         except:
             logger.error('Failed to get the symbol list')
             raise
-        return self.symbols_lst
 
     def get_reg_mo_lst(self):
         '''
