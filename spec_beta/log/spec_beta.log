@@ -1,7 +1,0 @@
-2018-01-24 10:04:06,404 INFO:[<ipython-input-6-5437dccaa9c8>:get_symbols_lst:12] testing
-2018-01-24 17:22:58,441 INFO:[<ipython-input-2-6c5531cd9d75>:get_symbols_lst:28] Success to get the symbol list
-2018-01-24 17:23:27,806 INFO:[<ipython-input-2-6c5531cd9d75>:get_symbols_lst:28] Success to get the symbol list
-2018-01-24 17:24:07,635 INFO:[<ipython-input-2-6c5531cd9d75>:get_symbols_lst:28] Success to get the symbol list
-2018-01-24 17:34:23,309 ERROR:[<ipython-input-1-6faf85ebd3a2>:get_symbols_lst:36] Failed to get the symbol list
-2018-01-24 17:55:34,447 INFO:[<ipython-input-2-66d25f5994bb>:get_symbols_lst:31] Success to get the symbol list
-2018-01-24 18:00:31,438 ERROR:[<ipython-input-1-8d51ef6681c7>:get_symbols_lst:32] Failed to get the symbol list
