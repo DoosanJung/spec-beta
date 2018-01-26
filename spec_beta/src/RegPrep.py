@@ -27,18 +27,6 @@ class RegPrep(object):
     #######################################################################
     #TODO: below
 
-    def get_reg_mo_lst(self, start_mo, end_mo):
-        '''
-        OUTPUT: Monthly regression months
-        '''
-        mo_lst = pd.read_csv(self.home_path + self.file_path['year_and_month],header=None, names='m')
-        mo_lst = mo_lst.m.apply(lambda mo: datetime.strptime(str(mo), "%Y%m"))
-        reg_mo_lst = mo_lst[(mo_lst >= datetime.strptime(str(start_mo), "%Y%m"))&(mo_lst <= datetime.strptime(str(end_mo), "%Y%m"))]
-        reg_mo_lst = reg_mo_lst.reset_index(drop=True)
-        # reg_mo_lst = reg_mo_lst[:81]
-        reg_mo_lst = reg_mo_lst[reg_mo_lst <= datetime.strptime(str(end_mo), "%Y%m") - relativedelta(years=1)]
-        return reg_mo_lst
-
     # Each month...
     def get_regressor(self, E_Rm,mo):
         '''
