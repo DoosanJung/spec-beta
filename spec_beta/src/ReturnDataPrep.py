@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 '''
 '''
-import pandas as pd
-from datetime import datetime
 import logging
 from logging import config
+import pandas as pd
+from datetime import datetime
 from dateutil.relativedelta import relativedelta
 from spec_beta.conf.SpecBetaConfig import SpecBetaConfig
 
@@ -40,7 +40,7 @@ class ReturnDataPrep(object):
 
     def get_reg_mo_lst(self):
         '''
-        OUTPUT: Monthly regression months
+            :return: Monthly regression months
         '''
         try:
             mo_lst = pd.read_csv(self.home_path + self.file_path['year_and_month'],header=None, names='m')
@@ -57,24 +57,24 @@ class ReturnDataPrep(object):
 
     def get_Ri_wo_wknds(self):
         '''
-        OUTPUT: Daily stock return (weekends removed)
+            :return: Daily stock return (weekends removed)
         '''
         try:
             RET_D_KSE = pd.read_csv(self.home_path + self.file_path['daily_stock_return'],index_col=0)
             RET_D_KSE.index = pd.to_datetime(RET_D_KSE.index, dayfirst=True)
             logger.info("Succeed in getting the stock return")
             if self.decimal_unit==True:
-                self.RET_D_KSE = RET_D_KSE/float(100) # percentage to decimal
-                return self.RET_D_KSE
+                RET_D_KSE = RET_D_KSE/float(100) # percentage to decimal
+                return RET_D_KSE
             else:
-                return self.RET_D_KSE # percentage
+                return RET_D_KSE # percentage
         except:
             logger.error('Failed to get stock return')
             raise
 
     def get_Rm_wo_wknds(self):
         '''
-        OUTPUT: Daily market return (weekends removed)
+            :return: Daily market return (weekends removed)
         '''
         try:
             RET_MKT_D_KSE = pd.read_csv(self.home_path + self.file_path['daily_market_return'],\
@@ -82,17 +82,17 @@ class ReturnDataPrep(object):
             RET_MKT_D_KSE.index = pd.to_datetime(RET_MKT_D_KSE.index, dayfirst=True)
             logger.info("Succeed in getting market return")
             if self.decimal_unit==True:
-                self.RET_MKT_D_KSE = RET_MKT_D_KSE/float(100) # percentage to decimal
-                return self.RET_MKT_D_KSE
+                RET_MKT_D_KSE = RET_MKT_D_KSE/float(100) # percentage to decimal
+                return RET_MKT_D_KSE
             else:
-                return self.RET_MKT_D_KSE # percentage
+                return RET_MKT_D_KSE # percentage
         except:
             logger.info("Failed to get market return")
             raise
 
     def get_Rf_wo_wknds(self):
         '''
-        OUTPUT: Daily risk-free return (weekends removed)
+            :return: Daily risk-free return (weekends removed)
         '''
         try:
             RF_CALL1 = pd.read_csv(self.home_path + self.file_path['risk_free_return'],\
@@ -101,24 +101,26 @@ class ReturnDataPrep(object):
             RF_CALL1 = RF_CALL1[RF_CALL1.index >= self.reg_mo_lst.min()-relativedelta(years=1)]
             logger.info("Succeed in getting the risk free return")
             if self.decimal_unit==True:
-                self.RF_CALL1 = RF_CALL1/float(100) # percentage to decimal
-                return self.RF_CALL1
+                RF_CALL1 = RF_CALL1/float(100) # percentage to decimal
+                return RF_CALL1
             else:
-                return self.RF_CALL1 # percentage
+                return RF_CALL1 # percentage
         except:
             logger.info("Failed to get risk free return")
             raise
 
     def get_E_Ri_wo_wknds(self):
         '''
-        OUTPUT: Daily excess stock return (weekends removed)
+            :return: Daily excess stock return (weekends removed)
         '''
         try:
+            RF_CALL1 = self.get_Rf_wo_wknds()
+            RET_D_KSE = self.get_Ri_wo_wknds()
             # duplicate RF_CALL1 to match the number of columns in RET_D_KSE
-            RF_CALL1_df = self.RF_CALL1.assign(**{str(i):self.RF_CALL1['RF_CALL1'] for i in range(len(self.symbols_lst)-1)})
+            RF_CALL1_df = RF_CALL1.assign(**{str(i):RF_CALL1['RF_CALL1'] for i in range(len(self.symbols_lst)-1)})
             RF_CALL1_df.columns = self.symbols_lst
-            self.RET_D_KSE = self.RET_D_KSE[self.RET_D_KSE.index >= self.reg_mo_lst.min()-relativedelta(years=1)]
-            self.E_Ri = self.RET_D_KSE.subtract(RF_CALL1_df)
+            RET_D_KSE = RET_D_KSE[RET_D_KSE.index >= self.reg_mo_lst.min()-relativedelta(years=1)]
+            self.E_Ri = RET_D_KSE.subtract(RF_CALL1_df)
             logger.info("Succeed in getting excess stock return")
             return self.E_Ri
         except:
@@ -127,11 +129,13 @@ class ReturnDataPrep(object):
 
     def get_E_Rm_wo_wknds(self):
         '''
-        OUTPUT: Daily excess market return (weekends removed)
+            :return: Daily excess market return (weekends removed)
         '''
         try:
-            self.RET_MKT_D_KSE = self.RET_MKT_D_KSE[self.RET_MKT_D_KSE.index >= self.reg_mo_lst.min()-relativedelta(years=1)]
-            self.E_Rm = self.RET_MKT_D_KSE.Rm - self.RF_CALL1.RF_CALL1
+            RF_CALL1 = self.get_Rf_wo_wknds()
+            RET_MKT_D_KSE = self.get_Rm_wo_wknds()
+            RET_MKT_D_KSE = RET_MKT_D_KSE[RET_MKT_D_KSE.index >= self.reg_mo_lst.min()-relativedelta(years=1)]
+            self.E_Rm = RET_MKT_D_KSE.Rm - RF_CALL1.RF_CALL1
             self.E_Rm.index = pd.to_datetime(self.E_Rm.index)
             logger.info("Succeed in getting excess market return")
             return self.E_Rm

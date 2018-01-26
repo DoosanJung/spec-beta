@@ -1,11 +1,10 @@
 #!/usr/bin/env python
 '''
 '''
-import pandas as pd
 import logging
 from logging import config
-from datetime import date, timedelta
-from datetime import datetime
+import pandas as pd
+from datetime import datetime, timedelta, date
 from dateutil.relativedelta import relativedelta
 from spec_beta.conf.SpecBetaConfig import SpecBetaConfig
 from spec_beta.src.ReturnDataPrep import ReturnDataPrep
@@ -23,15 +22,14 @@ class RegPrep(object):
         self.file_path = SpecBetaConfig.FILE_PATH
         self.to_csv = SpecBetaConfig.to_csv
         self.decimal_unit = SpecBetaConfig.decimal_unit
-
-    #######################################################################
-    #TODO: below
+        self.start_mo = start_mo
+        self.end_mo = end_mo
 
     # Each month...
-    def get_regressor(self, E_Rm,mo):
+    def get_regressor(self, E_Rm, mo):
         '''
         INPUT: month (t) , convert decimal >> percent
-        OUTPUT: Daily Dimson(1979) regressor:  Rm(t) + 5 lags of Rm(t)
+            :return: Daily Dimson(1979) regressor:  Rm(t) + 5 lags of Rm(t)
         '''
         # Init regressor_Rm
         regressor_Rm = pd.DataFrame()
@@ -61,7 +59,7 @@ class RegPrep(object):
     def get_regressor_full_sample(self, E_Rm, R_pfo_df, decimal_unit):
         '''
         INPUT: Full sample period ( R_pfo_df.index )
-        OUTPUT: Daily Dimson(1979) regressor:  Rm(t) + 5 lags of Rm(t)
+            :return: Daily Dimson(1979) regressor:  Rm(t) + 5 lags of Rm(t)
         '''
         # Init regressor_Rm
         regressor_Rm = pd.DataFrame()
