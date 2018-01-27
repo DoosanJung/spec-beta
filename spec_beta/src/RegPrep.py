@@ -10,6 +10,7 @@ from spec_beta.conf.SpecBetaConfig import SpecBetaConfig
 from spec_beta.src.ReturnDataPrep import ReturnDataPrep
 from spec_beta.src.MiscDataPrep import MiscDataPrep
 
+config.fileConfig("spec_beta/conf/SpecBeta.cfg")
 logger = logging.getLogger()
 
 
@@ -24,6 +25,11 @@ class RegPrep(object):
         self.decimal_unit = SpecBetaConfig.decimal_unit
         self.start_mo = start_mo
         self.end_mo = end_mo
+        rdp = ReturnDataPrep(self.start_mo, self.end_mo)
+        self.E_Rm = rdp.get_E_Rm_wo_wknds()
+
+    #######################################################################
+    #TODO: below
 
     # Each month...
     def get_regressor(self, E_Rm, mo):
@@ -56,7 +62,7 @@ class RegPrep(object):
         return regressor_Rm
 
     # Full sample period
-    def get_regressor_full_sample(self, E_Rm, R_pfo_df, decimal_unit):
+    def get_regressor_full_sample(self, E_Rm, R_pfo_df):
         '''
         INPUT: Full sample period ( R_pfo_df.index )
             :return: Daily Dimson(1979) regressor:  Rm(t) + 5 lags of Rm(t)

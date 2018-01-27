@@ -24,3 +24,5 @@
 2018-01-26 15:53:11,741 INFO:[ReturnDataPrep:get_Rf_wo_wknds:102] Succeed in getting the risk free return
 2018-01-26 15:53:11,746 INFO:[ReturnDataPrep:get_Rm_wo_wknds:83] Succeed in getting market return
 2018-01-26 15:53:11,749 INFO:[ReturnDataPrep:get_E_Rm_wo_wknds:140] Succeed in getting excess market return
+2018-01-27 07:26:56,219 INFO:[ReturnDataPrep:get_reg_mo_lst:52] Succeed in getting the regression month list
+2018-01-27 07:27:04,827 INFO:[MiscDataPrep:get_CP_CD_spread:171] Succeed in getting monthly CP CD spread
