@@ -24,6 +24,8 @@ class ReturnDataPrep(object):
         self.decimal_unit = SpecBetaConfig.decimal_unit
         self.start_mo = start_mo
         self.end_mo = end_mo
+        self.reg_mo_lst = self.get_reg_mo_lst()
+        self.symbols_lst = self.get_symbols_lst()
 
     def get_symbols_lst(self):
         '''
@@ -31,9 +33,9 @@ class ReturnDataPrep(object):
         '''
         try:
             symbols = pd.read_csv(self.home_path + self.file_path['symbols'])
-            self.symbols_lst = symbols.columns.tolist()
+            symbols_lst = symbols.columns.tolist()
             logger.info("Succeed in getting the symbol list")
-            return self.symbols_lst
+            return symbols_lst
         except:
             logger.error('Failed to get the symbol list')
             raise
@@ -48,9 +50,9 @@ class ReturnDataPrep(object):
             reg_mo_lst = mo_lst[(mo_lst >= datetime.strptime(str(self.start_mo), "%Y%m"))&(mo_lst <= datetime.strptime(str(self.end_mo), "%Y%m"))]
             reg_mo_lst = reg_mo_lst.reset_index(drop=True)
             # reg_mo_lst = reg_mo_lst[:81]
-            self.reg_mo_lst = reg_mo_lst[reg_mo_lst <= datetime.strptime(str(self.end_mo), "%Y%m") - relativedelta(years=1)]
+            reg_mo_lst = reg_mo_lst[reg_mo_lst <= datetime.strptime(str(self.end_mo), "%Y%m") - relativedelta(years=1)]
             logger.info("Succeed in getting the regression month list")
-            return self.reg_mo_lst
+            return reg_mo_lst
         except:
             logger.info("Failed to get the regression month list")
             raise
