@@ -30,7 +30,7 @@ class MiscDataPrep(object):
 
     def get_m_stock_level_disp(self):
         '''
-            :return: Daily stock-level disagreement
+            Daily stock-level disagreement
         '''
         try:
             m_stock_level_disp = pd.read_csv(self.home_path + self.file_path['EPS_LTG_stdev'],index_col=0)
@@ -44,7 +44,7 @@ class MiscDataPrep(object):
 
     def get_monthly_mkt_cap(self):
         '''
-            :return: Monthly mkt cap
+            Monthly mkt cap
         '''
         try:
             mkt_cap = pd.read_csv(self.home_path + self.file_path['market_cap'],index_col=0)
@@ -64,7 +64,7 @@ class MiscDataPrep(object):
 
     def get_monthly_vol(self):
         '''
-            :return: Monthly volatility
+            Monthly volatility
         '''
         try:
             vol = pd.read_csv(self.home_path + self.file_path['volatility'],index_col=0)
@@ -84,7 +84,7 @@ class MiscDataPrep(object):
 
     def get_smb_hml_umd(self):
         '''
-            :return: Daily SMB, HML, UMD portfolio returns (without weekends)
+            Daily SMB, HML, UMD portfolio returns (without weekends)
         '''
         try:
             SMB_HML_wo_wknds = pd.read_csv(self.home_path + self.file_path['SMB_HML'] , index_col=0) # percent_unit
@@ -111,7 +111,7 @@ class MiscDataPrep(object):
 
     def get_D_P(self):
         '''
-            :return: Monthly Dividend/Price_ratio
+            Monthly Dividend/Price_ratio
         '''
         try:
             monthly_DP_KOSPI = pd.read_csv(self.home_path + self.file_path['dividend_price_yield'],index_col=0)
@@ -132,7 +132,7 @@ class MiscDataPrep(object):
 
     def get_inflation(self):
         '''
-            :return: Monthly CPI yearly inflation
+            Monthly CPI yearly inflation
         '''
         try:
             monthly_CPI_yearly_inflation = pd.read_csv(self.home_path + self.file_path['inflation'],index_col=0)
@@ -151,7 +151,7 @@ class MiscDataPrep(object):
 
     def get_CP_CD_spread(self):
         '''
-            :return: Monthly CP - CD spread
+            Monthly CP - CD spread
         '''
         try:
             CP_CD_spread = pd.read_csv(self.home_path + self.file_path['CP_CD_spread'],index_col=0)

@@ -7,7 +7,6 @@ import pandas as pd
 from datetime import datetime, timedelta, date
 from dateutil.relativedelta import relativedelta
 import statsmodels.api as sm
-from tqdm import tqdm
 from spec_beta.conf.SpecBetaConfig import SpecBetaConfig
 from spec_beta.src.ReturnDataPrep import ReturnDataPrep
 from spec_beta.src.MiscDataPrep import MiscDataPrep
@@ -51,30 +50,31 @@ class BetaPfo(object):
         m_mkt_cap = mdp.get_monthly_mkt_cap()     # Monthly Market_cap # 2010-01-31 ~ 2016-09-30
         m_vol = mdp.get_monthly_vol()     # Monthly Vol # 2010-01-31 ~ 2016-09-30
 
-        #
+        # calculate pre_ranking_beta, assign companies into beta-sorted pfos
         prb = PreRankingBeta(start_mo = self.start_mo, end_mo = self.end_mo)
-        Twenty_Beta_Pfos = []
-        AggDisp_wo_wknds = []
-        for i, mo in tqdm(enumerate(reg_mo_lst)):
-            # calculate pre_ranking_E_Ri_retbeta for each stock for the month "mo"
-            pre_ranking_beta_df, E_Ri_ret = prb.pre_ranking_beta(i, mo, \
+        beta_pfos_lst = []
+        pre_ranking_pfo_lst = []
+        for i, mo in enumerate(reg_mo_lst):
+            # calculate pre_ranking_beta for each stock for the month "mo"
+            pre_ranking_beta_df, E_Ri_ret = prb.pre_ranking_beta(i = i, \
+                                            mo = mo, \
                                             E_Rm = E_Rm, \
                                             E_Ri = E_Ri, \
                                             symbols_lst = symbols_lst, \
                                             m_stock_level_disp = m_stock_level_disp, \
                                             m_mkt_cap = m_mkt_cap, \
                                             m_vol = m_vol)
-            AggDisp_wo_wknds.append(pre_ranking_beta_df)
+            pre_ranking_pfo_lst.append(pre_ranking_beta_df)
 
-            # monthly table1
-            # for the month mo
-            pfos, pfo_idx = assign_beta_pfo(pre_ranking_beta_df, mo, E_Ri_ret, to_csv)
-            Twenty_Beta_Pfos.append(pfos)
-            Table1_df_monthly_wo_wknds = pd.concat(Twenty_Beta_Pfos)
-            AggDisp_df_wo_wknds = pd.concat(AggDisp_wo_wknds)
-
-
+            # assign companies into twenty beta-sorted portfolios
+            pfos, pfo_idx = prb.assign_beta_pfo(df = pre_ranking_beta_df, \
+                                            mo = mo, \
+                                            E_Ri_ret = E_Ri_ret)
+            beta_pfos_lst.append(pfos)
+            twenty_beta_pfos = pd.concat(beta_pfos_lst)
+            pre_ranking_pfos = pd.concat(pre_ranking_pfo_lst)
+        return twenty_beta_pfos, pre_ranking_pfos
 
 if __name__=="__main__":
     prb = PreRankingBeta(201001,201709)
-    prb.create_pre_ranking_beta_pfos()
+    twenty_beta_pfos, pre_ranking_pfos = prb.create_pre_ranking_beta_pfos()

@@ -6,6 +6,7 @@ from logging import config
 import pandas as pd
 from datetime import datetime, timedelta, date
 from dateutil.relativedelta import relativedelta
+import statsmodels.api as sm
 from spec_beta.conf.SpecBetaConfig import SpecBetaConfig
 from spec_beta.src.ReturnDataPrep import ReturnDataPrep
 from spec_beta.src.MiscDataPrep import MiscDataPrep
@@ -46,3 +47,13 @@ class RegPrep(object):
         regressor_Rm = regressor_Rm*100
         regressor_Rm = sm.add_constant(regressor_Rm)
         return regressor_Rm
+
+    @staticmethod
+    def run_ols(y, x, pfunc):
+        model = sm.OLS(y,x).fit()
+        summary = model.summary()
+        if pfunc == True:
+            print summary
+        else:
+            pass
+        return model

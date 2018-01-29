@@ -42,7 +42,7 @@ class ReturnDataPrep(object):
 
     def get_reg_mo_lst(self):
         '''
-            :return: Monthly regression months
+            Monthly regression months
         '''
         try:
             mo_lst = pd.read_csv(self.home_path + self.file_path['year_and_month'],header=None, names='m')
@@ -59,7 +59,7 @@ class ReturnDataPrep(object):
 
     def get_Ri_wo_wknds(self):
         '''
-            :return: Daily stock return (weekends removed)
+            Daily stock return (weekends removed)
         '''
         try:
             RET_D_KSE = pd.read_csv(self.home_path + self.file_path['daily_stock_return'],index_col=0)
@@ -76,7 +76,7 @@ class ReturnDataPrep(object):
 
     def get_Rm_wo_wknds(self):
         '''
-            :return: Daily market return (weekends removed)
+            Daily market return (weekends removed)
         '''
         try:
             RET_MKT_D_KSE = pd.read_csv(self.home_path + self.file_path['daily_market_return'],\
@@ -94,7 +94,7 @@ class ReturnDataPrep(object):
 
     def get_Rf_wo_wknds(self):
         '''
-            :return: Daily risk-free return (weekends removed)
+            Daily risk-free return (weekends removed)
         '''
         try:
             RF_CALL1 = pd.read_csv(self.home_path + self.file_path['risk_free_return'],\
@@ -113,7 +113,7 @@ class ReturnDataPrep(object):
 
     def get_E_Ri_wo_wknds(self):
         '''
-            :return: Daily excess stock return (weekends removed)
+            Daily excess stock return (weekends removed)
         '''
         try:
             RF_CALL1 = self.get_Rf_wo_wknds()
@@ -131,7 +131,7 @@ class ReturnDataPrep(object):
 
     def get_E_Rm_wo_wknds(self):
         '''
-            :return: Daily excess market return (weekends removed)
+            Daily excess market return (weekends removed)
         '''
         try:
             RF_CALL1 = self.get_Rf_wo_wknds()
