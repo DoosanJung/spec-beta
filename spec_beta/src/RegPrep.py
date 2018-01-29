@@ -18,25 +18,13 @@ class RegPrep(object):
     '''
     Regressors
     '''
-    def __init__(self, start_mo, end_mo):
-        self.home_path = SpecBetaConfig.HOME_PATH
-        self.file_path = SpecBetaConfig.FILE_PATH
-        self.to_csv = SpecBetaConfig.to_csv
-        self.decimal_unit = SpecBetaConfig.decimal_unit
-        self.start_mo = start_mo
-        self.end_mo = end_mo
 
-    #######################################################################
-    #TODO: below
-
-    # Each month...
     @staticmethod
     def get_regressor(E_Rm, mo):
         '''
-            :param mo: month (t) , convert decimal >> percent
             :return: Daily Dimson(1979) regressor:  Rm(t) + 5 lags of Rm(t)
         '''
-        # Init regressor_Rm
+        # Initialize regressor_Rm
         regressor_Rm = pd.DataFrame()
         # no lag (previous 12 months)
         E_Rm_t = E_Rm[(E_Rm.index < mo)& (E_Rm.index >= mo-relativedelta(years=1))]
@@ -44,7 +32,7 @@ class RegPrep(object):
         regressor_idx = E_Rm_t.index
         # Drop the idx
         E_Rm_t = E_Rm_t.reset_index(drop=True)
-        # concat no lag
+        # concatenate no lag
         regressor_Rm = pd.concat([regressor_Rm, E_Rm_t],axis=1, ignore_index=True)
         # concat from lag 1 to lag 5
         for i in xrange(1,6):
@@ -58,33 +46,3 @@ class RegPrep(object):
         regressor_Rm = regressor_Rm*100
         regressor_Rm = sm.add_constant(regressor_Rm)
         return regressor_Rm
-
-    # Full sample period
-    @staticmethod
-    def get_regressor_full_sample(E_Rm, R_pfo_df):
-        '''
-            :param R_pfo_df: Full sample period ( R_pfo_df.index )
-            :return: Daily Dimson(1979) regressor:  Rm(t) + 5 lags of Rm(t)
-        '''
-        # Init regressor_Rm
-        regressor_Rm = pd.DataFrame()
-        # Save the idx
-        E_Rm_t = E_Rm[    (E_Rm.index >= R_pfo_df.index.min())   & (E_Rm.index <= R_pfo_df.index.max())   ] # 2010-01-01 ~ 2016-09-30
-        regressor_idx = E_Rm_t.index
-        # Drop the idx
-        E_Rm_t = E_Rm_t.reset_index(drop=True)
-        # concat no lag
-        regressor_Rm = pd.concat([regressor_Rm, E_Rm_t],axis=1, ignore_index=True)
-        # concat from lag 1 to lag 5
-        for i in xrange(1,6):
-            E_Rm_t_lag = E_Rm[    (E_Rm.index >= datetime.strptime(R_pfo_df.index.min(),'%Y-%m-%d') + timedelta(days=i)) \
-                                &  (E_Rm.index <= datetime.strptime(R_pfo_df.index.max(),'%Y-%m-%d') + timedelta(days=i+5))   ]
-            # Drop the idx for lag 1 to lag 5
-            # E_Rm_t_lag = E_Rm_t_lag.shift(periods=-i)
-            E_Rm_t_lag = E_Rm_t_lag[:len(E_Rm_t)]
-            E_Rm_t_lag = E_Rm_t_lag.reset_index(drop=True)
-            regressor_Rm = pd.concat([regressor_Rm, E_Rm_t_lag],ignore_index=True, axis=1)
-        regressor_Rm['mo'] = regressor_idx
-        regressor_Rm.set_index('mo',inplace=True)
-        regressor_Rm = regressor_Rm*100
-        regressor_Rm = sm.add_constant(regressor_Rm)

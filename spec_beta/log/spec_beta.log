@@ -34,3 +34,61 @@
 2018-01-27 19:57:31,501 INFO:[ReturnDataPrep:get_Rf_wo_wknds:103] Succeed in getting the risk free return
 2018-01-27 19:57:31,505 INFO:[ReturnDataPrep:get_Rm_wo_wknds:84] Succeed in getting market return
 2018-01-27 19:57:31,507 INFO:[ReturnDataPrep:get_E_Rm_wo_wknds:141] Succeed in getting excess market return
+2018-01-28 15:28:13,071 INFO:[ReturnDataPrep:get_reg_mo_lst:54] Succeed in getting the regression month list
+2018-01-28 15:28:13,333 INFO:[ReturnDataPrep:get_symbols_lst:37] Succeed in getting the symbol list
+2018-01-28 15:28:13,338 INFO:[ReturnDataPrep:get_Rf_wo_wknds:104] Succeed in getting the risk free return
+2018-01-28 15:28:13,342 INFO:[ReturnDataPrep:get_Rm_wo_wknds:85] Succeed in getting market return
+2018-01-28 15:28:13,344 INFO:[ReturnDataPrep:get_E_Rm_wo_wknds:142] Succeed in getting excess market return
+2018-01-28 15:28:13,349 INFO:[ReturnDataPrep:get_Rf_wo_wknds:104] Succeed in getting the risk free return
+2018-01-28 15:28:14,984 INFO:[ReturnDataPrep:get_Ri_wo_wknds:67] Succeed in getting the stock return
+2018-01-28 15:28:15,290 INFO:[ReturnDataPrep:get_E_Ri_wo_wknds:126] Succeed in getting excess stock return
+2018-01-28 15:31:26,304 INFO:[ReturnDataPrep:get_reg_mo_lst:54] Succeed in getting the regression month list
+2018-01-28 15:31:26,551 INFO:[ReturnDataPrep:get_symbols_lst:37] Succeed in getting the symbol list
+2018-01-28 15:31:26,556 INFO:[ReturnDataPrep:get_reg_mo_lst:54] Succeed in getting the regression month list
+2018-01-28 15:31:26,758 INFO:[ReturnDataPrep:get_symbols_lst:37] Succeed in getting the symbol list
+2018-01-28 15:31:26,763 INFO:[ReturnDataPrep:get_reg_mo_lst:54] Succeed in getting the regression month list
+2018-01-28 15:31:26,768 INFO:[ReturnDataPrep:get_Rf_wo_wknds:104] Succeed in getting the risk free return
+2018-01-28 15:31:28,390 INFO:[ReturnDataPrep:get_Ri_wo_wknds:67] Succeed in getting the stock return
+2018-01-28 15:31:28,685 INFO:[ReturnDataPrep:get_E_Ri_wo_wknds:126] Succeed in getting excess stock return
+2018-01-28 15:31:28,690 INFO:[ReturnDataPrep:get_Rf_wo_wknds:104] Succeed in getting the risk free return
+2018-01-28 15:31:28,694 INFO:[ReturnDataPrep:get_Rm_wo_wknds:85] Succeed in getting market return
+2018-01-28 15:31:28,695 INFO:[ReturnDataPrep:get_E_Rm_wo_wknds:142] Succeed in getting excess market return
+2018-01-28 15:31:28,728 INFO:[MiscDataPrep:get_m_stock_level_disp:39] Succeed in getting monthly stock-level dispersion
+2018-01-28 15:31:29,099 INFO:[MiscDataPrep:get_monthly_mkt_cap:59] Succeed in getting monthly market capitalization
+2018-01-28 15:31:31,393 INFO:[MiscDataPrep:get_monthly_vol:79] Succeed in monthly stock return volatility
+2018-01-28 15:32:12,616 INFO:[ReturnDataPrep:get_reg_mo_lst:54] Succeed in getting the regression month list
+2018-01-28 15:32:12,837 INFO:[ReturnDataPrep:get_symbols_lst:37] Succeed in getting the symbol list
+2018-01-28 15:32:12,842 INFO:[ReturnDataPrep:get_Rf_wo_wknds:104] Succeed in getting the risk free return
+2018-01-28 15:32:12,846 INFO:[ReturnDataPrep:get_Rm_wo_wknds:85] Succeed in getting market return
+2018-01-28 15:32:12,848 INFO:[ReturnDataPrep:get_E_Rm_wo_wknds:142] Succeed in getting excess market return
+2018-01-28 15:32:12,853 INFO:[ReturnDataPrep:get_Rf_wo_wknds:104] Succeed in getting the risk free return
+2018-01-28 15:32:14,486 INFO:[ReturnDataPrep:get_Ri_wo_wknds:67] Succeed in getting the stock return
+2018-01-28 15:32:14,776 INFO:[ReturnDataPrep:get_E_Ri_wo_wknds:126] Succeed in getting excess stock return
+2018-01-28 16:31:22,797 INFO:[ReturnDataPrep:get_reg_mo_lst:54] Succeed in getting the regression month list
+2018-01-28 16:31:23,048 INFO:[ReturnDataPrep:get_symbols_lst:37] Succeed in getting the symbol list
+2018-01-28 16:31:23,053 INFO:[ReturnDataPrep:get_reg_mo_lst:54] Succeed in getting the regression month list
+2018-01-28 16:31:23,256 INFO:[ReturnDataPrep:get_symbols_lst:37] Succeed in getting the symbol list
+2018-01-28 16:31:23,261 INFO:[ReturnDataPrep:get_reg_mo_lst:54] Succeed in getting the regression month list
+2018-01-28 16:31:23,266 INFO:[ReturnDataPrep:get_Rf_wo_wknds:104] Succeed in getting the risk free return
+2018-01-28 16:31:23,271 INFO:[ReturnDataPrep:get_Rm_wo_wknds:85] Succeed in getting market return
+2018-01-28 16:31:23,272 INFO:[ReturnDataPrep:get_E_Rm_wo_wknds:142] Succeed in getting excess market return
+2018-01-28 16:31:23,277 INFO:[ReturnDataPrep:get_Rf_wo_wknds:104] Succeed in getting the risk free return
+2018-01-28 16:31:24,926 INFO:[ReturnDataPrep:get_Ri_wo_wknds:67] Succeed in getting the stock return
+2018-01-28 16:31:25,227 INFO:[ReturnDataPrep:get_E_Ri_wo_wknds:126] Succeed in getting excess stock return
+2018-01-28 16:31:25,256 INFO:[MiscDataPrep:get_m_stock_level_disp:39] Succeed in getting monthly stock-level dispersion
+2018-01-28 16:31:25,631 INFO:[MiscDataPrep:get_monthly_mkt_cap:59] Succeed in getting monthly market capitalization
+2018-01-28 16:31:27,976 INFO:[MiscDataPrep:get_monthly_vol:79] Succeed in monthly stock return volatility
+2018-01-28 16:34:59,898 INFO:[ReturnDataPrep:get_reg_mo_lst:54] Succeed in getting the regression month list
+2018-01-28 16:35:00,116 INFO:[ReturnDataPrep:get_symbols_lst:37] Succeed in getting the symbol list
+2018-01-28 16:35:00,122 INFO:[ReturnDataPrep:get_reg_mo_lst:54] Succeed in getting the regression month list
+2018-01-28 16:35:00,355 INFO:[ReturnDataPrep:get_symbols_lst:37] Succeed in getting the symbol list
+2018-01-28 16:35:00,360 INFO:[ReturnDataPrep:get_reg_mo_lst:54] Succeed in getting the regression month list
+2018-01-28 16:35:00,365 INFO:[ReturnDataPrep:get_Rf_wo_wknds:104] Succeed in getting the risk free return
+2018-01-28 16:35:00,370 INFO:[ReturnDataPrep:get_Rm_wo_wknds:85] Succeed in getting market return
+2018-01-28 16:35:00,371 INFO:[ReturnDataPrep:get_E_Rm_wo_wknds:142] Succeed in getting excess market return
+2018-01-28 16:35:00,376 INFO:[ReturnDataPrep:get_Rf_wo_wknds:104] Succeed in getting the risk free return
+2018-01-28 16:35:02,030 INFO:[ReturnDataPrep:get_Ri_wo_wknds:67] Succeed in getting the stock return
+2018-01-28 16:35:02,337 INFO:[ReturnDataPrep:get_E_Ri_wo_wknds:126] Succeed in getting excess stock return
+2018-01-28 16:35:02,369 INFO:[MiscDataPrep:get_m_stock_level_disp:39] Succeed in getting monthly stock-level dispersion
+2018-01-28 16:35:02,737 INFO:[MiscDataPrep:get_monthly_mkt_cap:59] Succeed in getting monthly market capitalization
+2018-01-28 16:35:05,051 INFO:[MiscDataPrep:get_monthly_vol:79] Succeed in monthly stock return volatility

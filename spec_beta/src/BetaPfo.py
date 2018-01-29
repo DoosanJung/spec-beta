@@ -3,6 +3,11 @@
 
 import logging
 from logging import config
+import pandas as pd
+from datetime import datetime, timedelta, date
+from dateutil.relativedelta import relativedelta
+import statsmodels.api as sm
+from tqdm import tqdm
 from spec_beta.conf.SpecBetaConfig import SpecBetaConfig
 from spec_beta.src.ReturnDataPrep import ReturnDataPrep
 from spec_beta.src.MiscDataPrep import MiscDataPrep
@@ -13,7 +18,7 @@ from spec_beta.src.PreRankingBeta import PreRankingBeta
 config.fileConfig("spec_beta/conf/SpecBeta.cfg")
 logger = logging.getLogger()
 
-class PreRankingBeta(object):
+class BetaPfo(object):
 
     def __init__(self, start_mo, end_mo):
         self.home_path = SpecBetaConfig.HOME_PATH
@@ -38,24 +43,27 @@ class PreRankingBeta(object):
         reg_mo_lst = rdp.reg_mo_lst
 
         # Excess return data
-        E_Ri = rdp.get_E_Ri_wo_wknds()
         E_Rm = rdp.get_E_Rm_wo_wknds()
+        E_Ri = rdp.get_E_Ri_wo_wknds()
 
         # Miscellaneous data
         m_stock_level_disp = mdp.get_m_stock_level_disp()    # Monthly Stock-level disagreement # 2010-01-01 ~ 2016-09-01
         m_mkt_cap = mdp.get_monthly_mkt_cap()     # Monthly Market_cap # 2010-01-31 ~ 2016-09-30
         m_vol = mdp.get_monthly_vol()     # Monthly Vol # 2010-01-31 ~ 2016-09-30
 
-    #######################################################################
-    #TODO: below
-
         #
         prb = PreRankingBeta(start_mo = self.start_mo, end_mo = self.end_mo)
         Twenty_Beta_Pfos = []
         AggDisp_wo_wknds = []
         for i, mo in tqdm(enumerate(reg_mo_lst)):
-            # calculate pre_ranking_beta for each stock for the month "mo"
-            pre_ranking_beta_df, E_Ri_ret = prb.pre_ranking_beta(i, mo, m_stock_level_disp, m_mkt_cap, m_vol, )
+            # calculate pre_ranking_E_Ri_retbeta for each stock for the month "mo"
+            pre_ranking_beta_df, E_Ri_ret = prb.pre_ranking_beta(i, mo, \
+                                            E_Rm = E_Rm, \
+                                            E_Ri = E_Ri, \
+                                            symbols_lst = symbols_lst, \
+                                            m_stock_level_disp = m_stock_level_disp, \
+                                            m_mkt_cap = m_mkt_cap, \
+                                            m_vol = m_vol)
             AggDisp_wo_wknds.append(pre_ranking_beta_df)
 
             # monthly table1

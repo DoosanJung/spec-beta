@@ -6,6 +6,8 @@ from logging import config
 import pandas as pd
 from datetime import datetime, timedelta, date
 from dateutil.relativedelta import relativedelta
+import statsmodels.api as sm
+from tqdm import tqdm
 from spec_beta.conf.SpecBetaConfig import SpecBetaConfig
 from spec_beta.src.ReturnDataPrep import ReturnDataPrep
 from spec_beta.src.MiscDataPrep import MiscDataPrep
@@ -15,13 +17,10 @@ config.fileConfig("spec_beta/conf/SpecBeta.cfg")
 logger = logging.getLogger()
 
 
-
 class PreRankingBeta(object):
     '''
-    Regression
+    Regression to calculate Betas
     '''
-    #######################################################################
-    #TODO: below
 
     def __init__(self, start_mo, end_mo):
         self.home_path = SpecBetaConfig.HOME_PATH
@@ -30,10 +29,10 @@ class PreRankingBeta(object):
         self.decimal_unit = SpecBetaConfig.decimal_unit
         self.start_mo = start_mo
         self.end_mo = end_mo
-        rdp = ReturnDataPrep(self.start_mo, self.end_mo)
-        self.E_Rm = rdp.get_E_Rm_wo_wknds()
-        self.E_Ri = rdp.get_E_Ri_wo_wknds()
-        self.symbols_lst = rdp.symbols_lst
+        # rdp = ReturnDataPrep(self.start_mo, self.end_mo)
+        # self.E_Rm = rdp.get_E_Rm_wo_wknds()
+        # self.E_Ri = rdp.get_E_Ri_wo_wknds()
+        # self.symbols_lst = rdp.symbols_lst
 
     def run_ols(y, x, pfunc):
         model = sm.OLS(y,x).fit()
@@ -45,7 +44,8 @@ class PreRankingBeta(object):
         return model
 
     # Each month...
-    def pre_ranking_beta(self, i, mo, m_stock_level_disp, m_mkt_cap, m_vol):
+    def pre_ranking_beta(self, i, mo, E_Rm, E_Ri, symbols_lst, m_stock_level_disp, m_mkt_cap, m_vol):
+    # def pre_ranking_beta(self, i, mo, m_stock_level_disp, m_mkt_cap, m_vol):
         '''
         INPUT: month (t)
         OUTPUT: monthly # symbol, sum_beta, ret1,3,6,12  pfo_number, mo, mkt_cap, vol, disp.
@@ -55,19 +55,19 @@ class PreRankingBeta(object):
         RETURN CALCULATION: decimal_unit (E_Ri_ret)
         '''
         # X + constant: independent variables
-        regressor_Rm = RegPrep.get_regressor(E_Rm, mo)
+        regressor_Rm = RegPrep.get_regressor(E_Rm = E_Rm, mo = mo)
         # Percent unit for regression
 
         # Y : a dependent varialbe
-        E_Ri_t = self.E_Ri[(self.E_Ri.index < mo )& (self.E_Ri.index >= mo - relativedelta(years=1))]
+        E_Ri_t = E_Ri[(E_Ri.index < mo )& (E_Ri.index >= mo - relativedelta(years=1))]
         # Percent unit for regression
         E_Ri_t = E_Ri_t*100
 
         # To calculate individual return
-        E_Ri_ret = self.E_Ri[(self.E_Ri.index >= mo )& (self.E_Ri.index < mo + relativedelta(years=1))]
+        E_Ri_ret = E_Ri[(E_Ri.index >= mo )& (E_Ri.index < mo + relativedelta(years=1))]
 
         pre_ranking_beta_Frame=[]
-        for symbol in self.symbols_lst:
+        for symbol in symbols_lst:
             try:
                 sum_beta_dict={}
                 sum_beta_dict['mo'] = mo # mo
@@ -86,7 +86,7 @@ class PreRankingBeta(object):
             except:
                 print "WARNING!!! ",symbol
 
-        pre_ranking_beta_df = pd.DataFrame(pre_ranking_beta_Frame, index = self.symbols_lst)
+        pre_ranking_beta_df = pd.DataFrame(pre_ranking_beta_Frame, index = symbols_lst)
         # [symbols] x [mo, sum_beta, symbol]
         # 751 x 3
 
