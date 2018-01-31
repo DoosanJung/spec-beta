@@ -54,6 +54,8 @@ class BetaPfo(object):
         prb = PreRankingBeta(start_mo = self.start_mo, end_mo = self.end_mo)
         beta_pfos_lst = []
         pre_ranking_pfo_lst = []
+
+        # each month, rebalance the beta sorted portfilos
         for i, mo in enumerate(reg_mo_lst):
             # calculate pre_ranking_beta for each stock for the month "mo"
             pre_ranking_beta_df, E_Ri_ret = prb.pre_ranking_beta(i = i, \

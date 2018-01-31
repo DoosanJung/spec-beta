@@ -23,5 +23,9 @@ class SpecBetaConfig(object):
     "dividend_price_yield":"/spec_beta/data/monthly_DP_KOSPI_200401_201709.csv",
     #"inflation":"/spec_beta/data/monthly_CPI_yearly_inflation.csv",
     "CP_CD_spread":"/spec_beta/data/CP_CD_SPREAD_wo_wknds.csv",
-    "year_and_month":"/spec_beta/data/yrmo.csv"
+    "year_and_month":"/spec_beta/data/yrmo.csv",
+    "Raw_data_eps":"/spec_beta/Raw_data_eps/",
+    "EPS_STDEV":"/spec_beta/data/EPS_STDEV/"
     }
+    EPS_Raw_data_cols = ['Analyst_comp','Analyst','Opinion','Op_delta','Est_P', \
+                        'Est_P_delta','Present_P','OI','NI','ROA','ROE','EPS']
