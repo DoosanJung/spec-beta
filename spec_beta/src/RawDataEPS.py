@@ -26,15 +26,20 @@ class RawDataEPS(object):
         self.col_lst = SpecBetaConfig.EPS_Raw_data_cols
 
     def create_EPS_LTG(self):
+        '''
+            create standard deviation of EPS growth rate
+        '''
         for symbol in self.symbols_lst[0]:
             EPS_stdev_lst = []
             sum_df = self.get_sum_df(symbol)
-
             if sum_df.empty:
                 continue
             else:
+                # analyst list for a company
                 anal_lst = sum_df['Analyst'].sort_values().unique()
+                # EPS growth rate
                 EPS_gr_df = self.get_EPS_gr_df(sum_df, anal_lst, symbol)
+                # Standard deviation of the EPS growth rate
                 EPS_stdev_lst.append(self.get_stdev(EPS_gr_df))
                 EPS_stdev_df = pd.DataFrame(EPS_stdev_lst).transpose()
                 EPS_stdev_df.columns = ['STDEV']
@@ -58,6 +63,9 @@ class RawDataEPS(object):
             raise
 
     def get_sum_df(self, symbol):
+        '''
+            Merge EPS forecast files into a file
+        '''
         Frame=[]
         for fn in glob.iglob(self.home_path + self.file_path['Raw_data_eps']+ symbol + '/*.xlsx'):
             print fn
@@ -78,6 +86,9 @@ class RawDataEPS(object):
         return sum_df
 
     def get_EPS_gr_df(self, sum_df, anal_lst, symbol):
+        '''
+            EPS growth rate
+        '''
         EPS_gr_lst=[]
         for anal in anal_lst:
             print anal
@@ -102,11 +113,13 @@ class RawDataEPS(object):
             print 'NO EPS GR DF'
 
     def get_stdev(self, EPS_gr_df):
+        '''
+            Standard deviation of EPS growth rate
+        '''
         yrmo_grpd = EPS_gr_df.groupby('yrmo')
         yrmo_lst  = EPS_gr_df.yrmo.sort_values().unique()
         EPS_stdev_dict={}
         for yrmo in yrmo_lst:
-            # print np.nanstd(yrmo_grpd.get_group(yrmo).drop(['Company_code','yrmo'], 1).values)
             EPS_stdev_dict[yrmo] = np.nanstd(yrmo_grpd.get_group(yrmo).drop(['Company_code','yrmo'], 1).values)
         return EPS_stdev_dict
 
