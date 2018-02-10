@@ -29,3 +29,7 @@ class SpecBetaConfig(object):
     }
     EPS_Raw_data_cols = ['Analyst_comp','Analyst','Opinion','Op_delta','Est_P', \
                         'Est_P_delta','Present_P','OI','NI','ROA','ROE','EPS']
+    Beta_pfos_cols =  ['pfo_N_stocks', 'pfo_median_vol', 'pfo_stock_disp', \
+                        'pfo_perc_mkt_cap', 'pfo_avg_of_sumbeta', \
+                        'ret1_ew', 'ret1_vw', 'ret3_ew', 'ret3_vw',\
+                        'ret6_ew', 'ret6_vw', 'ret12_ew', 'ret12_vw']

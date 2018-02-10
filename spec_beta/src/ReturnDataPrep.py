@@ -16,7 +16,6 @@ class ReturnDataPrep(object):
     '''
     Return data such as excess stock return, excess market return
     '''
-
     def __init__(self, start_mo, end_mo):
         self.home_path = SpecBetaConfig.HOME_PATH
         self.file_path = SpecBetaConfig.FILE_PATH

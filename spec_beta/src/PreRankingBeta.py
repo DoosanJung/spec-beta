@@ -20,7 +20,6 @@ class PreRankingBeta(object):
     '''
     Regression to calculate Betas
     '''
-
     def __init__(self, start_mo, end_mo):
         self.home_path = SpecBetaConfig.HOME_PATH
         self.file_path = SpecBetaConfig.FILE_PATH
@@ -194,12 +193,11 @@ class PreRankingBeta(object):
                 pass
 
 
-        pfo_idx = ['pfo_N_stocks', 'pfo_median_vol', 'pfo_stock_disp', 'pfo_perc_mkt_cap', 'pfo_avg_of_sumbeta', \
-                    'ret1_ew', 'ret1_vw', 'ret3_ew', 'ret3_vw','ret6_ew', 'ret6_vw', 'ret12_ew', 'ret12_vw']
+        pfo_idx = SpecBetaConfig.Beta_pfos_cols
         return pd.DataFrame([pfo_N_stocks, pfo_median_vol, pfo_stock_disp, pfo_perc_mkt_cap, pfo_avg_of_sumbeta, \
                     ret1_ew_mean, ret1_vw_mean, ret3_ew_mean, ret3_vw_mean, ret6_ew_mean, ret6_vw_mean, \
                     ret12_ew_mean, ret12_vw_mean],\
-                     index = pfo_idx), pfo_idx
+                     index = pfo_idx)
 
     def rearrange_d_ret_df(self, d_ret_df):
         '''
