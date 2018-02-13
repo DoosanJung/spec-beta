@@ -192,7 +192,6 @@ class PreRankingBeta(object):
             else:
                 pass
 
-
         pfo_idx = SpecBetaConfig.Beta_pfos_cols
         return pd.DataFrame([pfo_N_stocks, pfo_median_vol, pfo_stock_disp, pfo_perc_mkt_cap, pfo_avg_of_sumbeta, \
                     ret1_ew_mean, ret1_vw_mean, ret3_ew_mean, ret3_vw_mean, ret6_ew_mean, ret6_vw_mean, \
