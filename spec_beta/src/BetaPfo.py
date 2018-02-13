@@ -90,7 +90,5 @@ class BetaPfo(object):
             raise
 
 if __name__=="__main__":
-    # prb = PreRankingBeta(201001,201709)
-    # twenty_beta_pfos, pre_ranking_pfos = prb.create_pre_ranking_beta_pfos()
     bp = BetaPfo(201001,201709)
     twenty_beta_pfos, pre_ranking_pfos = bp.create_pre_ranking_beta_pfos()
