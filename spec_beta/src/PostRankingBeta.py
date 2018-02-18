@@ -4,6 +4,7 @@
 import logging
 from logging import config
 import pandas as pd
+import numpy as np
 from spec_beta.conf.SpecBetaConfig import SpecBetaConfig
 from spec_beta.src.RegPrep import RegPrep
 

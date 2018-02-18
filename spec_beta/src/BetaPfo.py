@@ -131,22 +131,26 @@ class BetaPfo(object):
         '''
             create a table describing the beta-sorted portfolios
         '''
-        logger.info("Trying to create a summary table ")
+        # df = df.reset_index().set_index('field').drop("yrmo", axis=1)
         lst = SpecBetaConfig.Beta_pfos_cols
         try:
             if (kwargs.has_key("ew") and not kwargs.has_key("vw")):
                 cols = compress(lst, [not(re.search("vw",x)) for x in lst])
+                ew_or_vw = kwargs["ew"]
+
             elif (kwargs.has_key("vw") and not kwargs.has_key("ew")):
                 cols = compress(lst, [not(re.search("ew",x)) for x in lst])
+                ew_or_vw = kwargs["vw"]
 
-            df = df.reset_index().set_index('field').drop("yrmo", axis=1)
+            logger.info("Trying to create a summary table for {} portfolios".format(ew_or_vw))
+
             Table_df = self.get_Table(df=df, cols=cols)
             Table_df = pd.concat([Table_df, post_betas.transpose()])
-            logger.info("Succeed in creating a summary table")
+            logger.info("Succeed in creating a summary table for {} portfolios".format(ew_or_vw))
             logger.info(Table_df)
             return Table_df
         except:
-            logger.error("Failed to create a summary table")
+            logger.error("Failed to create a summary table for {} portfolios".format(ew_or_vw))
             raise
 
     def get_Table(self, df, cols):
@@ -164,5 +168,9 @@ if __name__=="__main__":
     beta_sorted_pfos, pfo_rets_ew, pfo_rets_vw = bp.create_pre_ranking_beta_pfos()
     post_betas_ew = bp.create_post_ranking_betas(pfo_rets_ew))
     post_betas_vw = bp.create_post_ranking_betas(pfo_rets_vw))
-    Table_df_ew = summarize_beta_pfos(beta_sorted_pfos, post_betas_ew, ew="equal weighted")
-    Table_df_vw = summarize_beta_pfos(beta_sorted_pfos, post_betas_vw, vw="value weighted")
+    Table_df_ew = bp.summarize_beta_pfos(df =beta_sorted_pfos, \
+                                    post_betas = post_betas_ew, \
+                                    ew="equal weighted")
+    Table_df_vw = bp.summarize_beta_pfos(df =beta_sorted_pfos, \
+                                    post_betas = post_betas_vw, \
+                                    vw="value weighted")
