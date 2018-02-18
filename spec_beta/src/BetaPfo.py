@@ -166,8 +166,8 @@ class BetaPfo(object):
 if __name__=="__main__":
     bp = BetaPfo(201001,201709)
     beta_sorted_pfos, pfo_rets_ew, pfo_rets_vw = bp.create_pre_ranking_beta_pfos()
-    post_betas_ew = bp.create_post_ranking_betas(pfo_rets_ew))
-    post_betas_vw = bp.create_post_ranking_betas(pfo_rets_vw))
+    post_betas_ew = bp.create_post_ranking_betas(pfo_rets_ew)
+    post_betas_vw = bp.create_post_ranking_betas(pfo_rets_vw)
     Table_df_ew = bp.summarize_beta_pfos(df =beta_sorted_pfos, \
                                     post_betas = post_betas_ew, \
                                     ew="equal weighted")
