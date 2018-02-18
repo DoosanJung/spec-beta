@@ -131,7 +131,7 @@ class BetaPfo(object):
         '''
             create a table describing the beta-sorted portfolios
         '''
-        # df = df.reset_index().set_index('field').drop("yrmo", axis=1)
+        df = df.reset_index().set_index('field').drop("yrmo", axis=1)
         lst = SpecBetaConfig.Beta_pfos_cols
         try:
             if (kwargs.has_key("ew") and not kwargs.has_key("vw")):
