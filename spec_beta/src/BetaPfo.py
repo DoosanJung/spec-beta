@@ -6,6 +6,7 @@ import logging
 from logging import config
 import pandas as pd
 from itertools import compress
+import matplotlib.pyplot as plt
 from spec_beta.conf.SpecBetaConfig import SpecBetaConfig
 from spec_beta.src.ReturnDataPrep import ReturnDataPrep
 from spec_beta.src.MiscDataPrep import MiscDataPrep
@@ -163,6 +164,38 @@ class BetaPfo(object):
         except:
             raise
 
+    def visualize(self, Table_df_ew, Table_df_vw):
+        '''
+        '''
+        logger.info("Trying to visualize equal_weigthed, value_weighted portfolio returns")
+        try:
+            fig=plt.figure(figsize=(12,6))
+            fig.set_facecolor('white')
+            self.render_subplot(fig, 121, df = Table_df_ew, title = "equal-weighted portfolios")
+            self.render_subplot(fig, 122, df = Table_df_vw, title = "value-weighted portfolios")
+            fig.show()
+            logger.info("Succeed in visualizing equal_weigthed, value_weighted portfolio returns")
+        except:
+            logger.error("Failed to visualize equal_weigthed, value_weighted portfolio returns")
+            raise
+
+    def render_subplot(self, fig, parameters, df, title):
+        ax=fig.add_subplot(parameters)
+        labels = df.columns.values
+        labels[0] = 'lowest_beta'
+        labels[len(df.columns)-1] = 'highest_beta'
+        x_range = range(len(df.columns))
+        ax.scatter(x_range, df.iloc[5].values, c='r', label = '12_month_return', alpha=0.5)
+        ax.scatter(x_range, df.iloc[8].values, c='g', label = '6_month_return', alpha=0.5)
+        ax.scatter(x_range, df.iloc[7].values, c='b', label = '3_month_return', alpha=0.5)
+        ax.scatter(x_range, df.iloc[6].values, c='k', label = '1_month_return', alpha=0.5)
+        plt.xticks(x_range)
+        ax.set_xticklabels(labels, rotation=45)
+        ax.set_xlabel("beta_sorted portfolio")
+        ax.set_ylabel("portfolio return")
+        ax.set_title(title)
+        ax.legend()
+
 if __name__=="__main__":
     bp = BetaPfo(201001,201709)
     beta_sorted_pfos, pfo_rets_ew, pfo_rets_vw = bp.create_pre_ranking_beta_pfos()
@@ -174,3 +207,4 @@ if __name__=="__main__":
     Table_df_vw = bp.summarize_beta_pfos(df =beta_sorted_pfos, \
                                     post_betas = post_betas_vw, \
                                     vw="value weighted")
+    bp.visualize(Table_df_ew, Table_df_vw)
