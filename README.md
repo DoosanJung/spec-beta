@@ -10,7 +10,7 @@ Investors' disagreement and the risk-return trade-off in the Korea stock market
 1. Sample period : 2009-01-01 ~ 2017.09.30
 2. Sample stocks : Korea Stock Market ([KOSPI market](http://global.krx.co.kr/contents/GLB/02/0201/0201010100/GLB0201010100.jsp))
 3. Data source : [DataGuide](http://www.dataguide.co.kr/DG5web/eng/index.asp)
-and [Korean Statistical Information Service](http://kosis.kr/eng/)
+and [Korean Statistical Information Service(KOSIS)](http://kosis.kr/eng/)
 
 
 ### Beta-sorted portfolios
@@ -21,7 +21,7 @@ and [Korean Statistical Information Service](http://kosis.kr/eng/)
 
 3. **Post-ranking betas** <br> Estimate the market beta of each portfolio by regressing daily *excess portfolio return* on *excess market return* using entire sample period. The regressor variable (market return) is constructed by the contemporaneous excess market return and five lags of the contemporaneous excess market returns to account for the illiquidity of small stocks. Post-ranking beta is the sum of six ordinary least squares (OLS) coefficients.
 
-4. **result** <br>`X-axis` represents twenty (20) beta-sorted portfolios from *the lowest beta portfolio* (left) to *the highest beta portfolio* (right). `Y-axis` represents equal-weighted and value-weighted portfolio return, in left subplot and right subplot respectively.
+4. **Result** <br>`X-axis` represents twenty (20) beta-sorted portfolios from *the lowest beta portfolio* (left) to *the highest beta portfolio* (right). `Y-axis` represents equal-weighted and value-weighted portfolio return, in left subplot and right subplot respectively.
 <br>
 <div style="text-align: center"><img src="docs/imgs/Figure_1.png" alt="Figure_1" style="width: 1400px"></div>
 
