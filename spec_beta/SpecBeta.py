@@ -54,7 +54,7 @@ class SpecBeta(object):
 
 if __name__=='__main__':
     # sample period: 2010-01-01 ~ 2017-09-01
-    specBeta = SpecBeta(201001, 201709)
+    specBeta = SpecBeta('201001', '201709')
     specBeta.create_beta_sorted_pfos()
     Table_df_ew = specBeta.Table_df_ew
     Table_df_vw = specBeta.Table_df_vw

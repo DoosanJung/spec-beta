@@ -11,7 +11,6 @@ from spec_beta.conf.SpecBetaConfig import SpecBetaConfig
 config.fileConfig("spec_beta/conf/SpecBeta.cfg")
 logger = logging.getLogger()
 
-
 class ReturnDataPrep(object):
     '''
     Return data such as excess stock return, excess market return
@@ -46,10 +45,10 @@ class ReturnDataPrep(object):
         try:
             mo_lst = pd.read_csv(self.home_path + self.file_path['year_and_month'],header=None, names='m')
             mo_lst = mo_lst.m.apply(lambda mo: datetime.strptime(str(mo), "%Y%m"))
-            reg_mo_lst = mo_lst[(mo_lst >= datetime.strptime(str(self.start_mo), "%Y%m"))&(mo_lst <= datetime.strptime(str(self.end_mo), "%Y%m"))]
+            reg_mo_lst = mo_lst[(mo_lst >= datetime.strptime(self.start_mo, "%Y%m"))&(mo_lst <= datetime.strptime(self.end_mo, "%Y%m"))]
             reg_mo_lst = reg_mo_lst.reset_index(drop=True)
             # reg_mo_lst = reg_mo_lst[:81]
-            reg_mo_lst = reg_mo_lst[reg_mo_lst <= datetime.strptime(str(self.end_mo), "%Y%m") - relativedelta(years=1)]
+            reg_mo_lst = reg_mo_lst[reg_mo_lst <= datetime.strptime(self.end_mo, "%Y%m") - relativedelta(years=1)]
             logger.info("Succeed in getting the regression month list")
             return reg_mo_lst
         except:

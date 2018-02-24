@@ -36,8 +36,8 @@ class RegPrep(object):
 
         try:
             if (kwargs.has_key("first_mo") and kwargs.has_key("last_mo")):
-                first_mo = datetime.strptime(str(kwargs["first_mo"]),'%Y%m')
-                last_mo = datetime.strptime(str(kwargs["last_mo"]),'%Y%m')
+                first_mo = datetime.strptime(kwargs["first_mo"],'%Y%m')
+                last_mo = datetime.strptime(kwargs["last_mo"],'%Y%m')
                 if first_mo > last_mo:
                     logger.error("First month should be earlier than the last month")
                     raise

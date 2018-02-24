@@ -17,13 +17,11 @@ class PreRankingBeta(object):
     '''
     Regression to calculate pre ranking Betas
     '''
-    def __init__(self, start_mo, end_mo):
+    def __init__(self):
         self.home_path = SpecBetaConfig.HOME_PATH
         self.file_path = SpecBetaConfig.FILE_PATH
         self.to_csv = SpecBetaConfig.to_csv
         self.decimal_unit = SpecBetaConfig.decimal_unit
-        self.start_mo = start_mo
-        self.end_mo = end_mo
 
     # Each month...
     # def pre_ranking_beta(self, i, mo, E_Rm, E_Ri, symbols_lst, m_stock_level_disp, m_mkt_cap, m_vol):

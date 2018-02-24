@@ -17,7 +17,6 @@ class MiscDataPrep(object):
     '''
     Miscellaneous data such as stock-level dispersion, market cap, etc.
     '''
-
     def __init__(self):
         self.home_path = SpecBetaConfig.HOME_PATH
         self.file_path = SpecBetaConfig.FILE_PATH

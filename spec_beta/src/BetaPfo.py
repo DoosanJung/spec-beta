@@ -5,6 +5,7 @@ import re
 import logging
 from logging import config
 import pandas as pd
+from datetime import datetime
 from itertools import compress
 import matplotlib.pyplot as plt
 from spec_beta.conf.SpecBetaConfig import SpecBetaConfig
@@ -26,8 +27,7 @@ class BetaPfo(object):
         self.file_path = SpecBetaConfig.FILE_PATH
         self.to_csv = SpecBetaConfig.to_csv
         self.decimal_unit = SpecBetaConfig.decimal_unit
-        self.start_mo = start_mo
-        self.end_mo = end_mo
+        self.start_mo, self.end_mo = self.init_check(start_mo, end_mo)
 
     def create_pre_ranking_beta_pfos(self):
         '''
@@ -63,7 +63,7 @@ class BetaPfo(object):
         logger.info("Trying to calculate pre-ranking betas & assign each stock to beta pfos")
         try:
             # calculate pre_ranking_beta, assign companies into beta-sorted pfos
-            pre_betas = PreRankingBeta(start_mo = self.start_mo, end_mo = self.end_mo)
+            pre_betas = PreRankingBeta()
             beta_sorted_pfos = {}
             pre_ranking_pfos = {}
             pfo_rets_ew = {}
@@ -196,8 +196,21 @@ class BetaPfo(object):
         ax.set_title(title)
         ax.legend()
 
+    def init_check(self, start_mo, end_mo):
+        try:
+            if isinstance(start_mo, (int, long)):
+                start_mo = str(start_mo)
+            if isinstance(end_mo, (int,long)):
+                end_mo = str(end_mo)
+            datetime.strptime(start_mo, "%Y%m")
+            datetime.strptime(end_mo, "%Y%m")
+            return start_mo, end_mo
+        except:
+            logger.error("Please use 'yyyymm' as input format")
+            raise TypeError("Please use 'yyyymm' as input format")
+
 if __name__=="__main__":
-    bp = BetaPfo(201001,201709)
+    bp = BetaPfo('201001','201709')
     beta_sorted_pfos, pfo_rets_ew, pfo_rets_vw = bp.create_pre_ranking_beta_pfos()
     post_betas_ew = bp.create_post_ranking_betas(pfo_rets_ew)
     post_betas_vw = bp.create_post_ranking_betas(pfo_rets_vw)

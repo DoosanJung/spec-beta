@@ -3,7 +3,7 @@ Investors' disagreement and the risk-return trade-off in the Korea stock market
 
 ### Motivation
 [Hong and Sraer (2016)](http://onlinelibrary.wiley.com/doi/10.1111/jofi.12431/abstract) <sup name = "footnote1">[1](#footnote1)</sup> shows that with short-sales constraints,
-> The greater divergence of opinion creates overpricing of high beta stocks compared to low beta ones [Miller (1977)](https://www.jstor.org/stable/2326520?seq=1#page_scan_tab_contents) <sup name = "footnote2">[2](#footnote2)</sup> and [Chen et al. (2002)](https://scholar.harvard.edu/stein/publications/breadth-ownership-and-stock-returns)<sup name = "footnote3">[3](#footnote3)</sup> . Arbitrageurs attempt to correct this mispricing but their limited risk-bearing capacity results only in limited shorting leading to equilibrium overpricing.
+> The greater divergence of opinion creates overpricing of high beta stocks compared to low beta ones ([Miller (1977)](https://www.jstor.org/stable/2326520?seq=1#page_scan_tab_contents) <sup name = "footnote2">[2](#footnote2)</sup> and [Chen et al. (2002)](https://scholar.harvard.edu/stein/publications/breadth-ownership-and-stock-returns)<sup name = "footnote3">[3](#footnote3)</sup>). Arbitrageurs attempt to correct this mispricing but their limited risk-bearing capacity results only in limited shorting leading to equilibrium overpricing.
 
 
 ### Data
