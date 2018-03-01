@@ -107,7 +107,7 @@ class PreRankingBeta(object):
             d_ret_ew={}
             d_ret_vw={}
             for month in [1,3,6,12]:
-                logger.info("calculating {} month(s) return".format(month))
+                logger.info("calculating {} month(s) return for month {}".format(month, mo))
                 for k, (bottom,top) in enumerate(percentile_lst):
                     indicator = 0
                     if indicator == 0:
